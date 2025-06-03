@@ -27,7 +27,7 @@ class WhatsAppService {
         try {
             if (msg.body.toLowerCase() === '!ping') {
                 await msg.reply('Pong! 🏓');
-            } else if (msg.body.toLowerCase() === '!partidos') {
+            } else if (msg.body.toLowerCase() === '!partidos' || msg.body.toLowerCase() === '!ping') {
                 const fromDate = '2025-06-01';
                 const toDate = '2025-06-12';
                 const fixtures = await this.getFixtures(fromDate, toDate);

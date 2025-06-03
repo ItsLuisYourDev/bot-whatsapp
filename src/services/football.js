@@ -30,7 +30,9 @@ class FootballService {
     }
 
     formatFixtures(fixtures) {
-        return fixtures.map(fixture => {
+        let resultado = "⚽ *PARTIDOS DE LA LIGA* ⚽\n\n";
+        
+        fixtures.forEach(fixture => {
             const date = new Date(fixture.fixture.date).toLocaleString('es-ES', {
                 dateStyle: 'medium',
                 timeStyle: 'short'
@@ -40,9 +42,19 @@ class FootballService {
             const awayTeam = fixture.teams.away.name;
             const homeGoals = fixture.goals.home !== null ? fixture.goals.home : '-';
             const awayGoals = fixture.goals.away !== null ? fixture.goals.away : '-';
+            const venue = fixture.fixture.venue.name;
+            const league = fixture.league.name;
+            const status = fixture.fixture.status.short;
 
-            return `${date} | ${homeTeam} ${homeGoals} - ${awayGoals} ${awayTeam}`;
-        }).join('\n');
+            resultado += `📅 *${date}*\n`;
+            resultado += `🏠 ${homeTeam} ${homeGoals} - ${awayGoals} ${awayTeam} 🏠\n`;
+            resultado += `📍 ${venue}\n`;
+            resultado += `🏟️ ${league}\n`;
+            resultado += `📊 Estado: ${status}\n`;
+            resultado += `\n${'─'.repeat(30)}\n\n`;
+        });
+        
+        return resultado;
     }
 }
 
